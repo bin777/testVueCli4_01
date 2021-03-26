@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+const Home = () => import('views/Home.vue');
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
     component: Home
   },
   {
@@ -16,14 +19,20 @@ const routes: Array<RouteConfig> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ 'views/About.vue')
   }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to,form,next) => {
+  console.log(to,form);
+  next();
 })
 
 export default router
