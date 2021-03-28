@@ -10,14 +10,15 @@ export default function request(config:Object){
   instance.interceptors.request.use(config => {
     return config
   }, err => {
+    
     // console.log(err);
   })
 
   instance.interceptors.response.use(res => {
-      if ( res.data.errCode == 200) {
-        return res.data
+      if ( res.data.returnCode == 'SUCCESS') {
+        return res.data.data;
       }else{
-        return [];  
+        return [];
       }
   }, err => {
     console.log(err);

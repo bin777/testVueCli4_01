@@ -4,7 +4,6 @@
     <div v-if="!isActive"><slot name="item-icon"></slot></div>
     <div v-else><slot name="item-icon-active"></slot></div>
     <div :style="activeStyle"><slot name="item-text"></slot></div>
-    {{msg}}
   </div>
 </template>
 
@@ -12,14 +11,13 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   @Component
   export default class TabBarItem extends Vue{
-    msg:string = 'msg';
 
     @Prop(String) private path! : string;
     @Prop({type: String, default: 'red'}) private activeColor!: string;
-    get isActive(){
+    get isActive():boolean{
       return this.$route.path.indexOf(this.path) !== -1
     }
-    get activeStyle() {
+    get activeStyle():object {
         return this.isActive ? {color: this.activeColor} : {}
       }
     itemClick():void {

@@ -16,13 +16,19 @@ export default class NavBar extends Vue {}
   .nav-bar {
     display: flex;
     line-height: 44px;
+    text-align: center;
+    height: 44px;
+    box-shadow: 0 1.2px 1.2px rgba(248,98,216, .5);
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    z-index: 1;
+    width:100%;
   }
   .nav-bar-left, .nav-bar-right{
     width:60px;
-    background: red;
   }
   .nav-bar-center{
     flex: 1;
-    background: blue;
   }
 </style>

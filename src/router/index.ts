@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-const Home = () => import('views/Home.vue');
+const Home = () => import('views/Home/Home.vue');
 
 Vue.use(VueRouter)
-
+// 解决重复点击相同路由控制台报错
+const originalPush: any = VueRouter.prototype.push;
+VueRouter.prototype.push = (location: Function) => {
+  return originalPush.call(this, location).catch((err: any) => err)
+}
 const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -30,8 +34,8 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to,form,next) => {
-  console.log(to,form);
+router.beforeEach((to, form, next) => {
+  // console.log(to,form);
   next();
 })
 
